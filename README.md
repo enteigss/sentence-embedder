@@ -17,10 +17,7 @@ docker build -t your-project-name .
 docker run your-project-name
 ```
 
-## Project Structure
-
-## Implementation Details
-Task 1: 
+## Task 1: 
 The transformer was built on top of Huggingface’s AutoTokenizer and AutoTransformer models. Using these classes from Hugginface allows the user to choose what type of model they want, utilizing the AutoModel’s from_pretrained method. By default, the tokenizer uses padding and truncation to force the token sequences to be the right length, but this can be turned off. The tokenizer class is used to turn a sentence in the form of a string into a sequence of tokens that can be fed into the transformer. 
 
 I designed the transformer class to allow the user to again select the model, the pooling strategy, normalization setting, and if they would like to project the final embedding. The transformer will take the sequence of tokens outputted by the tokenizer and transform it into an embedding representing the sentence. 
@@ -29,10 +26,10 @@ The pooling strategy I would choose to use if I had to would depend on the circu
 
 I would choose to use L2 normalization when using the model for tasks that don’t value magnitudinal information. For example, when detecting similarities between documents of varying lengths magnitudinal information is not useful, and may bog the model down. Generally, however, normalization would not help the model. 
 
-Task 2: 
+## Task 2: 
 I built the multi-task model on top of the transformer, simply adding a classification head and a sentiment analysis head to allow for multi-task capabilities. The tasks will leverage a shared representation of the sentence given by the transformer built in task 1. The classification head is a sequential module with dropout and a simple linear layer outputting data of the dimensions set by the user, and the sentiment analysis layer outputs a single number representing the sentiment score, suitable for regression-based sentiment scoring. Using dropout decreases the chances of overfitting, and encourages better representation across tasks. This way, the model will be forced to use alternative pathways, making it more likely to find representations that benefit both tasks. Normalization is turned off for the multi-task model to preserve as much information as possible. The forward pass inputs the sentence embeddings into both of the heads and returns both of the outputs. The prediction method will take the logits produced by the forward pass for task A and use it to generate probabilities using softmax and the predictions themselves using whichever class had the highest probability. It will also output the sentiment score for task B. 
 
-Task 3:
+## Task 3:
 ## 1. Entire Network Frozen
 
 ### Implications
@@ -97,7 +94,7 @@ Task 3:
 - Allowing later unfreezing of layers helps avoid quality loss due to domain mismatching
 
 
-Task 4: 
+## Task 4: 
 Data Handling
 The MultiTaskDataset class handles data for both tasks. It properly returns data when indexed.
 
