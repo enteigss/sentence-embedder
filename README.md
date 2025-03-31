@@ -7,7 +7,7 @@
 ## Running the Project
 How to run with terminal:
 ```bash
-python src/main.py
+python main.py
 ```
 
 ## Docker Support
