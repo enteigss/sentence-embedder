@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Make sure Python can find your modules
-ENV PYTHONPATH="${PYTHONPATH}:/app"
+ENV PYTHONPATH=/app
 
 # Default command - runs a basic example
-CMD ["python", "-m", "src/main.py"]
+CMD ["python", "main.py"]

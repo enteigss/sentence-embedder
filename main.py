@@ -16,6 +16,7 @@ def main():
     
     # Tokenize sentences
     encoded = tokenizer.encode(sentences)
+    print("Sentences to encode:", sentences)
     print(f"Input IDs shape: {encoded['input_ids'].shape}")
     print(f"Attention mask shape: {encoded['attention_mask'].shape}")
     
@@ -33,10 +34,7 @@ def main():
     
     print(f"Sentence embeddings shape: {sentence_embeddings.shape}")
     print(f"Embeddings are normalized: {torch.allclose(torch.norm(sentence_embeddings, p=2, dim=1), torch.ones(len(sentences)))}")
-    
-    # Decode the tokens
-    decoded = tokenizer.decode(encoded['input_ids'])
-    print(f"Decoded sentences: {decoded}")
+    print(f"Sentence embeddings: {sentence_embeddings}")
 
 if __name__ == "__main__":
     main()
